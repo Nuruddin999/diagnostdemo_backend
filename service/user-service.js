@@ -1,7 +1,5 @@
-const { User, Token, Rights } = require('../models');
+const { User, Token, Rights, Applica } = require('../models');
 const bcrypt = require('bcrypt');
-const uuid = require('uuid');
-const mailService = require('./mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
@@ -116,6 +114,7 @@ class UserService {
   async deleteUser(req, res, next) {
     try {
       const { id } = req.params;
+      await
       await User.destroy({ where: { id } })
       return res.json({ deleted: 'ok' });
     } catch (e) {
