@@ -1,6 +1,6 @@
 const uploadFile = require("../middlewares/upload");
 const fs = require("fs");
-const baseUrl = "http://188.68.220.210/api/file/";
+const baseUrl = "http://188.68.220.24/api/file/";
 const { User } = require('../models');
 const upload = async (req, res) => {
   try {
