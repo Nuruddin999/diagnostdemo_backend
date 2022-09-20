@@ -73,7 +73,7 @@ class UserService {
     const userDto = new UserDto({ email: user.email, id, isActivated: true });
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveToken(user, tokens.refreshToken);
-    return { ...tokens, user: { id, email: userEmail,urlSignPath, signFileName, name, speciality, phone, role, isDeletedPlace, rights } }
+    return { ...tokens, user: { id, email: userEmail, urlSignPath, signFileName, name, speciality, phone, role, isDeletedPlace, rights } }
   }
 
   async getAllUsers(req, res, next) {
@@ -114,7 +114,7 @@ class UserService {
   async deleteUser(req, res, next) {
     try {
       const { id } = req.params;
-      await
+      if (id === '2') { return }
       await User.destroy({ where: { id } })
       return res.json({ deleted: 'ok' });
     } catch (e) {
@@ -151,7 +151,7 @@ class UserService {
   }
   async updateUserPrimaryData(email, speciality, phone) {
     const user = await User.findOne({ where: { email } })
-    await user.update({ speciality, phone})
+    await user.update({ speciality, phone })
     return { user }
   }
 }
